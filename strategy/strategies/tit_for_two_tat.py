@@ -1,6 +1,6 @@
 from game import Move_enum, Round
 
-def tit_for_tat(history: list[Round])-> Move_enum: 
+def tit_for_two_tat(history: list[Round])-> Move_enum: 
     if len(history) <= 1:
         return Move_enum.cooperate
     

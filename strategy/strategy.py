@@ -13,6 +13,16 @@ class Strategy:
     def __str__(self) -> str:
         return f"Strategy {self.name}: {self.score}"
     
+    def __eq__(self, other):
+        return self.score == other.score
+
+    def __lt__(self,other):
+        return self.score < other.score 
+    
     def execute(self, history: list[Round]) -> Move_enum:
-        return self.strategy_fn(history)
+        move = self.strategy_fn(history)
+        return move
+    
+    def add_to_score(self, score: int) -> None:
+        self.score += score
     
