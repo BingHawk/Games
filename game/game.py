@@ -1,12 +1,8 @@
 from strategy import Strategy, load_strategies
 from game import Round, Move_enum
+from .scores import Scores
 import random
 
-class Scores: 
-    DEFECT_DEFECT = 1
-    DEFECT_COOPERATE = 5
-    COPERATE_COOPERATE = 3
-    COOPERATE_DEFECT = 0
 
 class Game:
     strategies: list[Strategy]
@@ -15,12 +11,14 @@ class Game:
                  n_iterations: int = 5,
                  n_rounds: int = 200,
                  random_std_dev: int = 0,
+                 scores: Scores = None
                  ) -> None:
         self.n_rounds = n_rounds
         self.n_iterations = n_iterations
         self.random_std_dev = random_std_dev
         
         self.strategies =  load_strategies()
+        self.scores = scores if scores != None else Scores()
 
     
     def randomize_n_round(self) -> int:
@@ -58,19 +56,19 @@ class Game:
     def __add_scores(self, own_strat:Strategy, opp_strat:Strategy, own_move:Move_enum, opp_move:Move_enum) -> None:
         if own_move == Move_enum.defect:
             if opp_move == Move_enum.defect:
-                own_strat.add_to_score(Scores.DEFECT_DEFECT)
-                opp_strat.add_to_score(Scores.DEFECT_DEFECT)
+                own_strat.add_to_score(self.scores.DEFECT_DEFECT)
+                opp_strat.add_to_score(self.scores.DEFECT_DEFECT)
             elif opp_move == Move_enum.cooperate: 
-                own_strat.add_to_score(Scores.DEFECT_COOPERATE)
-                opp_strat.add_to_score(Scores.COOPERATE_DEFECT)
+                own_strat.add_to_score(self.scores.DEFECT_COOPERATE)
+                opp_strat.add_to_score(self.scores.COOPERATE_DEFECT)
                 
         elif own_move == Move_enum.cooperate:
             if opp_move == Move_enum.defect:
-                own_strat.add_to_score(Scores.COOPERATE_DEFECT)
-                opp_strat.add_to_score(Scores.DEFECT_COOPERATE)
+                own_strat.add_to_score(self.scores.COOPERATE_DEFECT)
+                opp_strat.add_to_score(self.scores.DEFECT_COOPERATE)
             elif opp_move == Move_enum.cooperate: 
-                own_strat.add_to_score(Scores.COPERATE_COOPERATE)
-                opp_strat.add_to_score(Scores.COPERATE_COOPERATE)
+                own_strat.add_to_score(self.scores.COPERATE_COOPERATE)
+                opp_strat.add_to_score(self.scores.COPERATE_COOPERATE)
                             
             
             
