@@ -32,6 +32,7 @@ class Game:
             self.__run_iteration()
     
     def print_scores(self) -> None:
+        self.strategies.sort(reverse=True)
         for strat in self.strategies:  
             print(strat)
     
