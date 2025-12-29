@@ -1,4 +1,4 @@
-from game import Move_enum, Round
+from core import Move_enum, Round
 
 def sneaky(history: list[Round])-> Move_enum: 
     if len(history) == 0:

@@ -1,9 +1,5 @@
-from enum import Enum
+from .moves import Move_enum
 
-class Move_enum(Enum):
-    cooperate = 0
-    defect = 1
-    
 class Round:
     opp: Move_enum
     own: Move_enum

@@ -1,4 +1,4 @@
-class Scores:
+class Points:
     def __init__(self, 
                  DEFECT_DEFECT: int = 1, 
                  DEFECT_COOPERATE: int = 5, 
